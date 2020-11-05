@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Decor Design</string>
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_confirm_password_hint">Confirm Password</string>
+    <string name="signup_login_hint">Already have an account? Sign In!</string>
+    <string name="login_signup_hint">Don\'t have an account? Sign Up!</string>
+    <string name="login_background">login background</string>
+    <string name="decor_design">Decor Design</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="name">Name</string>
+    <string name="logo">Logo</string>
+    <string name="gender">Gender</string>
+    <string name="dd_mm_yy">dd/mm/yy</string>
+    <string name="user">User</string>
+    <string name="designer">Designer</string>
+    <string name="register_as">REGISTER AS</string>
+    <string name="search">Search...</string>
+    <string name="logout">Logout</string>
+    <string name="send_message">Send Message</string>
+    <string name="curriculum_vitae">Curriculum Vitae</string>
+    <string name="not_set">not set</string>
+    <string name="_0_post_s">0 Post(s)</string>
+    <string name="mobile">Mobile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="settings">Settings</string>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+</resources>

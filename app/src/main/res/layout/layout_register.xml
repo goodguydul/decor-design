@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/loginCard"
+    app:cardCornerRadius="@dimen/loginCardRadius"
+    android:elevation="5dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/loginViewsMargin"
+    android:layout_marginBottom="@dimen/loginViewsMargin"
+    android:background="@color/whiteCardColor">
+
+    <LinearLayout
+        style="@style/linearParent"
+        android:layout_gravity="center"
+        android:padding="@dimen/loginViewsMargin">
+
+        <TextView
+            android:id="@+id/headerRegisterTextView"
+            style="@style/headerTextPrimary"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:fontFamily="@font/convergence"
+            android:text="@string/register"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#7C4C30" />
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextName"
+                style="@style/modifiedEditText"
+                android:autofillHints=""
+                android:fontFamily="@font/convergence"
+                android:hint="@string/name"
+                android:inputType="text"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="371dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/genderText"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:paddingTop="15dp"
+                android:text="@string/gender"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="13sp" />
+
+            <Spinner
+                android:id="@+id/genderOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="371dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/birthText"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:paddingTop="23dp"
+                android:text="Birth Date"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/editTextBirthDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="@string/dd_mm_yy"
+                android:inputType="none"
+                android:textColor="@color/secondaryTextColor" />
+
+        </LinearLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextUsername"
+                style="@style/modifiedEditText"
+                android:autofillHints=""
+                android:fontFamily="@font/convergence"
+                android:hint="Username"
+                android:inputType="text"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                style="@style/modifiedEditText"
+                android:autofillHints=""
+                android:fontFamily="@font/convergence"
+                android:hint="@string/login_email_hint"
+                android:inputType="textEmailAddress"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                style="@style/modifiedEditText"
+                android:autofillHints=""
+                android:fontFamily="@font/convergence"
+                android:hint="@string/login_password_hint"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextPasswordConfirm"
+                style="@style/modifiedEditText"
+                android:autofillHints=""
+                android:fontFamily="@font/convergence"
+                android:hint="@string/login_confirm_password_hint"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/registerButton"
+            style="@style/loginButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="9dp"
+            android:fontFamily="@font/convergence"
+            android:text="@string/register" />
+
+        <TextView
+            android:id="@+id/textViewLogin"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:fontFamily="@font/convergence"
+            android:onClick="login"
+            android:text="@string/signup_login_hint"
+            android:textAlignment="center"
+            android:textColor="#7C4C30"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

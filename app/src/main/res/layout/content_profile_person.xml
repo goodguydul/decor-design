@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Profile"
+    tools:showIn="@layout/fragment_profile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/profileDetailsLayout">
+
+            <ImageView
+                android:id="@+id/nameImageView"
+                style="@style/profileDetailsImage"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:id="@+id/nameProfileText"
+                style="@style/profileDetailsTextMain"
+                android:layout_toEndOf="@id/nameImageView"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/usernameText"
+                style="@style/profileDetailsMiniText"
+                android:layout_toEndOf="@id/nameImageView"
+                android:text="Designer"
+                android:textColor="#808080"
+                android:textStyle="italic" />
+
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/profileDetailsLayout">
+            <ImageView
+                android:id="@+id/genderImageView"
+                android:src="@drawable/user"
+                style="@style/profileDetailsImage" />
+
+            <TextView
+                style="@style/profileDetailsTextMain"
+                android:layout_toEndOf="@id/genderImageView"
+                android:text="Gender" />
+
+            <TextView
+                android:id="@+id/genderText"
+                style="@style/profileDetailsMiniText"
+                android:layout_toEndOf="@id/genderImageView"
+                android:text="Male"
+                android:textStyle="italic" />
+
+        </RelativeLayout>
+
+        <View style="@style/proifleDetailsView" />
+
+        <RelativeLayout style="@style/profileDetailsLayout">
+            <ImageView
+                android:id="@+id/birthDateImageView"
+                android:src="@android:drawable/ic_menu_my_calendar"
+                style="@style/profileDetailsImage" />
+
+            <TextView
+                style="@style/profileDetailsTextMain"
+                android:layout_toEndOf="@id/birthDateImageView"
+                android:text="Birth Date" />
+
+            <TextView
+                android:id="@+id/birthText"
+                style="@style/profileDetailsMiniText"
+                android:layout_toEndOf="@id/birthDateImageView"
+                android:text="0000-00-00"
+                android:textStyle="italic" />
+
+        </RelativeLayout>
+
+        <View style="@style/proifleDetailsView" />
+
+        <RelativeLayout style="@style/profileDetailsLayout">
+
+            <ImageView
+                android:id="@+id/mobileImageView"
+                style="@style/profileDetailsImage"
+                android:src="@drawable/ic_phone" />
+
+            <TextView
+                style="@style/profileDetailsTextMain"
+                android:layout_toEndOf="@id/mobileImageView"
+                android:text="@string/mobile" />
+
+            <TextView
+                android:id="@+id/profilePhoneText"
+                style="@style/profileDetailsMiniText"
+                android:layout_toEndOf="@id/mobileImageView"
+                android:text="@string/not_set"
+                android:textColor="#808080"
+                android:textStyle="italic" />
+
+        </RelativeLayout>
+
+        <View style="@style/proifleDetailsView" />
+
+        <RelativeLayout style="@style/profileDetailsLayout">
+
+            <ImageView
+                android:id="@+id/emailImageView"
+                style="@style/profileDetailsImage"
+                android:src="@drawable/ic_email" />
+
+            <TextView
+                style="@style/profileDetailsTextMain"
+                android:layout_toEndOf="@id/emailImageView"
+                android:text="Email" />
+
+            <TextView
+                android:id="@+id/emailProfileText"
+                style="@style/profileDetailsMiniText"
+                android:layout_toEndOf="@id/emailImageView"
+                android:text="@string/not_set"
+                android:textColor="#808080"
+                android:textStyle="italic" />
+
+        </RelativeLayout>
+
+        <View style="@style/proifleDetailsView" />
+
+        <LinearLayout
+            android:id="@+id/designerLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    android:id="@+id/addressImageView"
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_cv" />
+
+                <TextView
+                    android:text="@string/curriculum_vitae"
+                    android:layout_toEndOf="@id/addressImageView"
+                    style="@style/profileDetailsTextMain" />
+
+                <TextView
+                    android:id="@+id/click_cv"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toEndOf="@id/addressImageView"
+                    android:text="@string/not_set"
+                    android:textStyle="italic" />
+                <ImageView
+                    android:id="@+id/CvImageViewGo"
+                    style="@style/profileDetailsImage"
+                    android:adjustViewBounds="true"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="#808080"
+                    android:src="@drawable/ic_rightarrow" />
+            </RelativeLayout>
+        </LinearLayout>
+        <View style="@style/proifleDetailsView" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
