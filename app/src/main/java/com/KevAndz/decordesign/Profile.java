@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.KevAndz.decordesign.controller.PrefManager;
 
 public class Profile extends Fragment {
-    TextView usernameText, emailProfileText, nameProfileText, profilePhoneText;
+    TextView usernameText, emailProfileText, nameProfileText, profilePhoneText, genderText, birthdateText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,8 +26,10 @@ public class Profile extends Fragment {
         emailProfileText = (TextView) view.findViewById(R.id.emailProfileText);
         nameProfileText = (TextView) view.findViewById(R.id.nameProfileText);
         profilePhoneText = (TextView) view.findViewById(R.id.profilePhoneText);
+        genderText = (TextView) view.findViewById(R.id.genderText);
+        birthdateText = (TextView) view.findViewById(R.id.birthdateText);
 
-        User user = PrefManager.getInstance(getActivity().getApplicationContext()).getUser();
+        final User user = PrefManager.getInstance(getActivity().getApplicationContext()).getUser();
 
         if(user.getUsername().equals("null")){
             usernameText.setText("not set");
@@ -51,6 +53,18 @@ public class Profile extends Fragment {
             profilePhoneText.setText("not set");
         }else{
             profilePhoneText.setText(user.getPhonenumber());
+        }
+
+        if(user.getBirthdate().equals("null") || user.getBirthdate().equals("0000-00-00")){
+            birthdateText.setText("not set");
+        }else{
+            birthdateText.setText(user.getBirthdate());
+        }
+
+        if(user.getGenders().equals("null")){
+            genderText.setText("not set");
+        }else{
+            genderText.setText(user.getGenders());
         }
 
         if (user.getUserLevel() == 0){
@@ -88,6 +102,12 @@ public class Profile extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), EditProfile.class);
+                intent.putExtra("names", user.getName());
+                intent.putExtra("email", user.getEmail());
+                intent.putExtra("username", user.getUsername());
+                intent.putExtra("gender", user.getGenders());
+                intent.putExtra("phone", user.getPhonenumber());
+                intent.putExtra("birthdate", user.getBirthdate());
                 startActivity(intent);
             }
         });

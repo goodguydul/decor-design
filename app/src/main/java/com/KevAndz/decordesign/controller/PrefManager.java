@@ -12,10 +12,13 @@ public class PrefManager {
     private static final String KEY_USERNAME = "user_name";
     private static final String KEY_EMAIL = "user_email";
     private static final String KEY_NAME = "user_fullName";
+    private static final String KEY_GENDER = "gender";
+    private static final String KEY_BIRTHDATE = "birthdate";
     private static final String KEY_ID = "user_id";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
     private static final String KEY_PROFILE_IMAGE_URL= "prof_img_url";
     private static final String KEY_PHONE_NUMBER = "user_phonenumber";
+
     private static final String KEY_USER_LEVEL = "user_level";
 
     private static PrefManager mInstance;
@@ -38,6 +41,8 @@ public class PrefManager {
         editor.putString(KEY_USERNAME, user.getUsername());
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_NAME, user.getName());
+        editor.putString(KEY_BIRTHDATE, user.getBirthdate());
+        editor.putString(KEY_GENDER, user.getGenders());
         editor.putString(KEY_PHONE_NUMBER, user.getPhonenumber());
         editor.putString(KEY_PROFILE_IMAGE_URL, user.getProf_img_url());
         editor.putInt(KEY_USER_LEVEL, user.getUserLevel());
@@ -57,6 +62,8 @@ public class PrefManager {
                 sharedPreferences.getString(KEY_USERNAME, null),
                 sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_NAME, null),
+                sharedPreferences.getString(KEY_BIRTHDATE, null),
+                sharedPreferences.getString(KEY_GENDER, null),
                 sharedPreferences.getString(KEY_PHONE_NUMBER, null),
                 sharedPreferences.getString(KEY_PROFILE_IMAGE_URL, null),
                 sharedPreferences.getInt(KEY_USER_LEVEL, -1)

@@ -39,6 +39,8 @@
 
         </RelativeLayout>
 
+        <View style="@style/proifleDetailsView" />
+
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
                 android:id="@+id/genderImageView"
@@ -73,7 +75,7 @@
                 android:text="Birth Date" />
 
             <TextView
-                android:id="@+id/birthText"
+                android:id="@+id/birthdateText"
                 style="@style/profileDetailsMiniText"
                 android:layout_toEndOf="@id/birthDateImageView"
                 android:text="0000-00-00"
@@ -164,7 +166,7 @@
                     android:src="@drawable/ic_rightarrow" />
             </RelativeLayout>
         </LinearLayout>
-        <View style="@style/proifleDetailsView" />
+
 
     </LinearLayout>
 

@@ -23,15 +23,36 @@
                 style="@style/profileDetailsImage" />
 
             <EditText
-                android:id="@+id/profileName"
+                android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_toEndOf="@+id/nameImageView"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="fullname"
+                android:inputType="textPersonName" />
 
         </RelativeLayout>
+        <View style="@style/proifleDetailsView" />
+
+        <RelativeLayout style="@style/profileDetailsLayout">
+            <ImageView
+                android:id="@+id/usernameImageView"
+                android:src="@drawable/user"
+                style="@style/profileDetailsImage" />
+
+            <EditText
+                android:id="@+id/editTextUsername"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/usernameImageView"
+                android:ems="10"
+                android:hint="username"
+                android:inputType="textPersonName" />
+
+        </RelativeLayout>
+        <View style="@style/proifleDetailsView" />
 
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
@@ -41,12 +62,12 @@
 
             <Spinner
                 android:id="@+id/genderOptions"
-                android:layout_width="164dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_toEndOf="@id/genderImageView" />
         </RelativeLayout>
+        <View style="@style/proifleDetailsView" />
 
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
@@ -59,8 +80,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:focusable="true"
-                android:hint="dd/mm/yy"
+                android:focusable="false"
+                android:hint="@string/dd_mm_yy"
                 android:inputType="none"
                 android:layout_toEndOf="@id/birthDateImageView"                />
 
@@ -74,14 +95,14 @@
                 style="@style/profileDetailsImage" />
 
             <EditText
-                android:id="@+id/phoneNumber"
+                android:id="@+id/editPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="phone"
-                android:text="Phone"
+                android:layout_marginStart="1dp"
                 android:layout_toEndOf="@id/mobileImageView"
-                />
+                android:ems="10"
+                android:hint="phonenumber"
+                android:inputType="phone" />
 
 
         </RelativeLayout>
@@ -94,12 +115,12 @@
                 style="@style/profileDetailsImage" />
 
             <EditText
-                android:id="@+id/emailProfileText"
+                android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                android:text="Email"
+                android:hint="email"
                 android:layout_toEndOf="@id/emailImageView"
                 />
 
@@ -108,6 +129,7 @@
         <View style="@style/proifleDetailsView" />
 
         <LinearLayout
+            android:id="@+id/designerLayoutEditProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">

@@ -155,6 +155,7 @@ public class RegisterActivity extends AppCompatActivity{
         if (view != null){
             InputMethodManager imm = (InputMethodManager)
                     getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
