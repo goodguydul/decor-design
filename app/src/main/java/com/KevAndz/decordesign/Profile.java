@@ -1,8 +1,10 @@
 package com.KevAndz.decordesign;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -108,12 +110,22 @@ public class Profile extends Fragment {
                 intent.putExtra("gender", user.getGenders());
                 intent.putExtra("phone", user.getPhonenumber());
                 intent.putExtra("birthdate", user.getBirthdate());
-                startActivity(intent);
+                startActivityForResult(intent, 10001);
+
             }
         });
 
 
         return view;
     }
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((requestCode == 10001) && (resultCode == Activity.RESULT_OK)){
+            // recreate your fragment here
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(this).attach(this).commit();
+        }
+    }
 }

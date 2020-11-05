@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         profilePhoneText    = user.getPhonenumber();
         profileimg_url      = user.getProf_img_url();
 
-        if (usernameText.equals("null") || emailProfileText.equals("null") || nameProfileText.equals("null") || nameProfileText.equals("null") || profilePhoneText.equals("null") || profileimg_url.equals("null")){
+        if (usernameText.equals("null") || emailProfileText.equals("null") || nameProfileText.equals("null") || nameProfileText.equals("") || profilePhoneText.equals("null") || profileimg_url.equals("null")){
             new android.os.Handler().postDelayed(
                     new Runnable() {
                         public void run() {
