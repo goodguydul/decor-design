@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.KevAndz.decordesign.UploadPhotoProfile">
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:contentScrim="@color/profilePrimaryDark"
+        app:expandedTitleMarginEnd="64dp"
+        app:expandedTitleMarginStart="48dp"
+        app:expandedTitleTextAppearance="@style/TransparentText"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:toolbarId="@+id/toolbar">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/profile_bk"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePict"
+                android:layout_width="315dp"
+                android:layout_height="444dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="-15dp"
+                android:src="@drawable/user"
+                app:civ_border_color="#80ffffff"
+                app:civ_border_width="2dp" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="70dp">
+
+            <Button
+                android:id="@+id/sdBackBtn"
+                style="@style/profileStyledBackButton"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:minWidth="30dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+
+            <Button
+                android:id="@+id/saveProfilePictureBtn"
+                style="@style/profileStyledSaveProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_alignEnd="@id/sdBackBtn"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:minWidth="30dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/save" />
+        </RelativeLayout>
+    </android.support.design.widget.CollapsingToolbarLayout>
+</android.support.constraint.ConstraintLayout>

@@ -63,9 +63,20 @@ public class RegisterActivity extends AppCompatActivity{
                 DatePickerDialog.OnDateSetListener dpd = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            int s       = monthOfYear+1;
-                            String a    = dayOfMonth+"/"+s+"/"+year;
-                            editTextBirthDate.setText(""+a);
+                        int s       = monthOfYear+1;
+                        String d    = "";
+                        String m    = "";
+
+                        if (s < 10){
+                            m = "0" + s;
+                        }
+                        if (dayOfMonth < 10){
+                            d = "0" + dayOfMonth;
+                        }else{
+                            d = "" + dayOfMonth;
+                        }
+                        String a    = year+"/"+m+"/"+d;
+                        editTextBirthDate.setText(""+a);
                     }
                 };
 
@@ -194,7 +205,7 @@ public class RegisterActivity extends AppCompatActivity{
             params.put("email", email);
             params.put("password", password);
             params.put("level", registerAs);
-
+            Log.d("BIRTHDATE_REGISTER",birthdate);
             //returing the response
             return requestHandler.sendPostRequest(URLS.URL_REGISTER, params);
         }

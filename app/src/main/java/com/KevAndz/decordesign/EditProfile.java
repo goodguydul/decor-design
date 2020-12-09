@@ -38,7 +38,7 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        User user = PrefManager.getInstance(this.getApplicationContext()).getUser();
+        final User user = PrefManager.getInstance(this.getApplicationContext()).getUser();
 
         Bundle bundle = getIntent().getExtras();
 
@@ -62,7 +62,6 @@ public class EditProfile extends AppCompatActivity {
         editPhoneNumber         = findViewById(R.id.editPhoneNumber);
 
         editTextBirthDate.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
 
@@ -70,7 +69,18 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         int s       = monthOfYear+1;
-                        String a    = dayOfMonth+"/"+s+"/"+year;
+                        String d    = "";
+                        String m    = "";
+
+                        if (s < 10){
+                            m = "0" + s;
+                        }
+                        if (dayOfMonth < 10){
+                            d = "0" + dayOfMonth;
+                        }else{
+                            d = "" + dayOfMonth;
+                        }
+                        String a    = year+"/"+m+"/"+d;
                         editTextBirthDate.setText(""+a);
                     }
                 };
@@ -100,6 +110,17 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.profilePict).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), UploadPhotoProfile.class);
+                intent.putExtra("user_id", user.getId());
+                startActivityForResult(intent, 10001);
+
+            }
+        });
+
         findViewById(R.id.editProfileBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,8 +147,8 @@ public class EditProfile extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(phonenumber)) {
-            editTextEmail.setError("Please enter your phonenumber");
-            editTextEmail.requestFocus();
+            editPhoneNumber.setError("Please enter your phone number!");
+            editPhoneNumber.requestFocus();
             return;
         }
 
@@ -160,7 +181,6 @@ public class EditProfile extends AppCompatActivity {
         //if it passes all the validations
         //executing the async task
         User user = PrefManager.getInstance(this.getApplicationContext()).getUser();
-
         EditProfile.UpdateUser ru = new EditProfile.UpdateUser(user.getId(), name, birthDate, gender, username, email, phonenumber);
 
         User updatedData = new User(
@@ -194,10 +214,11 @@ public class EditProfile extends AppCompatActivity {
         private ProgressBar progressBar;
         private String name, birthdate, gender, username, email, phonenumber;
         private  int id;
+
         UpdateUser(int id, String name, String birthdate, String gender, String username, String email, String phonenumber){
             this.id  = id;
             this.username   = username;
-            this.phonenumber = phonenumber;
+            this.phonenumber= phonenumber;
             this.email      = email;
             this.name       = name;
             this.gender     = gender;
