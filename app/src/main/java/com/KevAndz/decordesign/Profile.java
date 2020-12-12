@@ -2,6 +2,8 @@ package com.KevAndz.decordesign;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -9,12 +11,18 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.KevAndz.decordesign.controller.PrefManager;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Profile extends Fragment {
     TextView usernameText, emailProfileText, nameProfileText, profilePhoneText, genderText, birthdateText;
@@ -32,6 +40,10 @@ public class Profile extends Fragment {
         birthdateText = (TextView) view.findViewById(R.id.birthdateText);
 
         final User user = PrefManager.getInstance(getActivity().getApplicationContext()).getUser();
+        if (user.getProf_img_url() != null){
+            ImageView imageView = (ImageView) view.findViewById(R.id.profilePict);
+            Picasso.get().load(user.getProf_img_url() ).into(imageView);
+        }
 
         if(user.getUsername().equals("null")){
             usernameText.setText("not set");

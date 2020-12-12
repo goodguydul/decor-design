@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -24,10 +27,16 @@ import android.widget.Toast;
 
 import com.KevAndz.decordesign.controller.PrefManager;
 import com.KevAndz.decordesign.controller.URLS;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 
 public class EditProfile extends AppCompatActivity {
@@ -39,6 +48,11 @@ public class EditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         final User user = PrefManager.getInstance(this.getApplicationContext()).getUser();
+
+        if (user.getProf_img_url() != null){
+            ImageView imageView = (ImageView) findViewById(R.id.profilePict);
+            Picasso.get().load(user.getProf_img_url() ).into(imageView);
+        }
 
         Bundle bundle = getIntent().getExtras();
 
@@ -96,7 +110,7 @@ public class EditProfile extends AppCompatActivity {
         }else if (bundle.getString("gender").equals("Female")){
             genderSpinner.setSelection(1);
         }
-
+        
         editTextName.setText(bundle.getString("names"));
         editTextUsername.setText(bundle.getString("username"));
         editTextEmail.setText(bundle.getString("email"));

@@ -3,6 +3,7 @@ package com.KevAndz.decordesign;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -23,32 +24,25 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.KevAndz.decordesign.controller.PrefManager;
 import com.KevAndz.decordesign.controller.URLS;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.ServerResponse;
+import net.gotev.uploadservice.UploadInfo;
 import net.gotev.uploadservice.UploadNotificationConfig;
+import net.gotev.uploadservice.UploadService;
+import net.gotev.uploadservice.UploadStatusDelegate;
 
 import java.io.IOException;
 import java.util.UUID;
 
-public class UploadPhotoProfile extends AppCompatActivity implements SingleUploadBroadcastReceiver.Delegate {
+public class UploadPhotoProfile extends AppCompatActivity {
 
     private static final String TAG = "AndroidUploadService";
 
     private final SingleUploadBroadcastReceiver uploadReceiver =
             new SingleUploadBroadcastReceiver();
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        uploadReceiver.register(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        uploadReceiver.unregister(this);
-    }
 
     //storage permission code
     private static final int STORAGE_PERMISSION_CODE = 123;
@@ -60,6 +54,7 @@ public class UploadPhotoProfile extends AppCompatActivity implements SingleUploa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_upload_photo_profile);
         imageView = (ImageView) findViewById(R.id.profilePict);
 
@@ -87,8 +82,8 @@ public class UploadPhotoProfile extends AppCompatActivity implements SingleUploa
     }
 
     public void uploadMultipart() {
-        Bundle bundle = getIntent().getExtras();
-        String id = String.valueOf(bundle.getInt("user_id"));
+        final Bundle bundle = getIntent().getExtras();
+        String id = String.valueOf(bundle.getInt("user_id", 0));
 
         if (filePath == null){
             Toast.makeText(this, "Select photo first!", Toast.LENGTH_SHORT).show();
@@ -99,17 +94,55 @@ public class UploadPhotoProfile extends AppCompatActivity implements SingleUploa
                 //getting the actual path of the image
                 String path = getPath(filePath);
                 String uploadId = UUID.randomUUID().toString();
-                uploadReceiver.setDelegate(this);
-                uploadReceiver.setUploadID(uploadId);
 
                 //Creating a multi part request
                 assert bundle != null;
-                new MultipartUploadRequest(this, uploadId, URLS.URL_UPLOAD_PROFILE_PIC)
+                new MultipartUploadRequest(this, uploadId, "https://ddapi.000webhostapp.com/api/upload.php")
                         .addFileToUpload(path, "image") //Adding file
                         .addParameter("id", id) //Adding text parameter to the request
                         .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
-                        .startUpload(); //Starting the upload
+                        .setDelegate(new UploadStatusDelegate() {  //Add these lines to get upload status
+                            @Override
+                            public void onProgress(Context context, UploadInfo uploadInfo) {
+
+                            }
+
+                            @Override
+                            public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse,
+                                                Exception exception) {
+                                Toast.makeText(context, "Something Went Wrong!", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
+                                Toast.makeText(context, "Profile Photo Uploaded!", Toast.LENGTH_SHORT).show();
+                                User user = PrefManager.getInstance(context).getUser();
+                                User updatedData = new User(
+                                        user.getId(),
+                                        user.getUsername(),
+                                        user.getEmail(),
+                                        user.getName(),
+                                        user.getBirthdate(),
+                                        user.getBirthdate(),
+                                        user.getPhonenumber(),
+                                        "https://ddapi.000webhostapp.com/api/uploads/" + user.getId() + ".jpg",
+                                        user.getUserLevel()
+                                );
+                                //storing new updated data in shared preferences
+                                PrefManager.getInstance(getApplicationContext()).setUserLogin(updatedData);
+                                finish();
+                            }
+
+                            @Override
+                            public void onCancelled(Context context, UploadInfo uploadInfo) {
+                                Toast.makeText(context, "Upload Cancelled!", Toast.LENGTH_SHORT).show();
+//
+                            }
+                        }).startUpload();
+//                        .startUpload(); //Starting the upload
+
 
             } catch (Exception exc) {
                 Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
@@ -188,28 +221,4 @@ public class UploadPhotoProfile extends AppCompatActivity implements SingleUploa
         }
     }
 
-    @Override
-    public void onProgress(int progress) {
-
-    }
-
-    @Override
-    public void onProgress(long uploadedBytes, long totalBytes) {
-
-    }
-
-    @Override
-    public void onError(Exception exception) {
-
-    }
-
-    @Override
-    public void onCompleted(int serverResponseCode, byte[] serverResponseBody) {
-
-    }
-
-    @Override
-    public void onCancelled() {
-
-    }
 }

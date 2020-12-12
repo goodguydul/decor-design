@@ -110,7 +110,7 @@ public class Search extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                     JSONArray jArray = (JSONArray) obj.getJSONArray("user");
                     ListView lvData = (ListView) getActivity().findViewById(R.id.lvDataUser);
-                    final List<DesignerData> listData =new ArrayList<>();
+                    final List<DesignerData> listData = new ArrayList<>();
 
                     for (int i = 0; i < jArray.length(); i++) {
                         JSONObject objs = jArray.getJSONObject(i);
@@ -122,13 +122,14 @@ public class Search extends Fragment {
                         designer.setPhone(objs.getString("phonenumber"));
                         designer.setGender(objs.getString("gender"));
                         designer.setBirthdate(objs.getString("birthdate"));
-
+                        designer.setPictureimg_url(objs.getString("profileimg_url"));
                         listData.add(designer);
                     }
 //                    Log.d("jArray Null", jArray.getString(2));
                     DesignerAdapter adapter = new DesignerAdapter(getContext(), R.layout.data_list_view, listData);
                     adapter.notifyDataSetChanged();
                     lvData.setAdapter(adapter);
+
                     lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -140,7 +141,7 @@ public class Search extends Fragment {
                             intent.putExtra("gender", designer.getGender());
                             intent.putExtra("phone", designer.getPhone());
                             intent.putExtra("birthdate", designer.getBirthDate());
-
+                            intent.putExtra("profileimg_url", designer.getPictureimg_url());
                             startActivity(intent);
                         }
                     });

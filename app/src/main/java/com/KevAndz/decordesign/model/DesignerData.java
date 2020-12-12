@@ -8,6 +8,7 @@ public class DesignerData {
     private String phone;
     private String gender;
     private String birthdate;
+    private String pictureimg_url;
 
     public String getNames() {
         return name;
@@ -40,5 +41,9 @@ public class DesignerData {
     public String getBirthDate() { return birthdate; }
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
+    }
+    public String getPictureimg_url() { return pictureimg_url; }
+    public void setPictureimg_url(String pictureimg_url) {
+        this.pictureimg_url = pictureimg_url;
     }
 }
