@@ -56,7 +56,7 @@ public class DesignerAdapter extends ArrayAdapter<DesignerData> {
         holder.txtUsername.setText(designer.getUsername());
         holder.txtEmail.setText(String.valueOf(designer.getEmail()));
 
-        if (designer.getPictureimg_url() != null){
+        if (!designer.getPictureimg_url().equals("null")){
             Picasso.get().load(designer.getPictureimg_url()).into(holder.profileImg);
         }
         return v;

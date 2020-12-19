@@ -1,7 +1,8 @@
 package com.KevAndz.decordesign.model;
 
 public class DesignerData {
-    
+
+    private int id;
     private String name;
     private String username;
     private String email;
@@ -9,7 +10,14 @@ public class DesignerData {
     private String gender;
     private String birthdate;
     private String pictureimg_url;
+    private String CV_url;
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNames() {
         return name;
     }
@@ -45,5 +53,9 @@ public class DesignerData {
     public String getPictureimg_url() { return pictureimg_url; }
     public void setPictureimg_url(String pictureimg_url) {
         this.pictureimg_url = pictureimg_url;
+    }
+    public String getCV_url() { return CV_url; }
+    public void setCV_url(String CV_url) {
+        this.CV_url = CV_url;
     }
 }

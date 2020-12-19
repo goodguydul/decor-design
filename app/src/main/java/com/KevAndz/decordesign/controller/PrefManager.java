@@ -17,6 +17,7 @@ public class PrefManager {
     private static final String KEY_ID = "user_id";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
     private static final String KEY_PROFILE_IMAGE_URL= "prof_img_url";
+    private static final String KEY_CV_URL= "cv_url";
     private static final String KEY_PHONE_NUMBER = "user_phonenumber";
 
     private static final String KEY_USER_LEVEL = "user_level";
@@ -45,6 +46,7 @@ public class PrefManager {
         editor.putString(KEY_GENDER, user.getGenders());
         editor.putString(KEY_PHONE_NUMBER, user.getPhonenumber());
         editor.putString(KEY_PROFILE_IMAGE_URL, user.getProf_img_url());
+        editor.putString(KEY_CV_URL, user.getCV_url());
         editor.putInt(KEY_USER_LEVEL, user.getUserLevel());
         editor.putBoolean(KEY_IS_LOGGED_IN,true);
         editor.apply();
@@ -66,6 +68,7 @@ public class PrefManager {
                 sharedPreferences.getString(KEY_GENDER, null),
                 sharedPreferences.getString(KEY_PHONE_NUMBER, null),
                 sharedPreferences.getString(KEY_PROFILE_IMAGE_URL, null),
+                sharedPreferences.getString(KEY_CV_URL, null),
                 sharedPreferences.getInt(KEY_USER_LEVEL, -1)
         );
     }

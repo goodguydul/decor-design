@@ -133,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                             userJson.getString("gender"),
                             userJson.getString("phonenumber"),
                             userJson.getString("profileimage_url"),
+                            userJson.getString("cv_url"),
                             userJson.getInt("user_level")
                     );
 

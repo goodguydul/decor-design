@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -17,8 +21,9 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import android.support.v4.app.Fragment;
 import com.KevAndz.decordesign.controller.DesignerAdapter;
+import com.KevAndz.decordesign.controller.PrefManager;
 import com.KevAndz.decordesign.controller.URLS;
 import com.KevAndz.decordesign.model.DesignerData;
 
@@ -110,19 +115,22 @@ public class Search extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                     JSONArray jArray = (JSONArray) obj.getJSONArray("user");
                     ListView lvData = (ListView) getActivity().findViewById(R.id.lvDataUser);
+                    final User user = PrefManager.getInstance(getContext()).getUser();
                     final List<DesignerData> listData = new ArrayList<>();
 
                     for (int i = 0; i < jArray.length(); i++) {
                         JSONObject objs = jArray.getJSONObject(i);
+                        Log.d("added - ", objs.getString("name") + "-" + objs.getInt("id") );
                         DesignerData designer = new DesignerData();
+                        designer.setId(objs.getInt("id"));
                         designer.setNames(objs.getString("name"));
-                        Log.d("added - ", objs.getString("name"));
                         designer.setUsername(objs.getString("username"));
                         designer.setEmail(objs.getString("email"));
                         designer.setPhone(objs.getString("phonenumber"));
                         designer.setGender(objs.getString("gender"));
                         designer.setBirthdate(objs.getString("birthdate"));
                         designer.setPictureimg_url(objs.getString("profileimg_url"));
+                        designer.setCV_url(objs.getString("cv_url"));
                         listData.add(designer);
                     }
 //                    Log.d("jArray Null", jArray.getString(2));
@@ -134,15 +142,26 @@ public class Search extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             DesignerData designer = listData.get(position);
-                            Intent intent = new Intent(view.getContext(), SearchDetail.class);
-                            intent.putExtra("names", designer.getNames());
-                            intent.putExtra("email", designer.getEmail());
-                            intent.putExtra("username", designer.getUsername());
-                            intent.putExtra("gender", designer.getGender());
-                            intent.putExtra("phone", designer.getPhone());
-                            intent.putExtra("birthdate", designer.getBirthDate());
-                            intent.putExtra("profileimg_url", designer.getPictureimg_url());
-                            startActivity(intent);
+                            Intent intent;
+                            if (designer.getId() == user.getId()){
+                                Fragment mFragment = new Profile();
+                                FragmentManager fragmentManager = getFragmentManager();
+                                fragmentManager.beginTransaction().replace(R.id.page_container, mFragment).commit();
+
+                            }else{
+                                intent = new Intent(view.getContext(), SearchDetail.class);
+                                intent.putExtra("id", designer.getId());
+                                intent.putExtra("names", designer.getNames());
+                                intent.putExtra("email", designer.getEmail());
+                                intent.putExtra("username", designer.getUsername());
+                                intent.putExtra("gender", designer.getGender());
+                                intent.putExtra("phone", designer.getPhone());
+                                intent.putExtra("birthdate", designer.getBirthDate());
+                                intent.putExtra("profileimg_url", designer.getPictureimg_url());
+                                intent.putExtra("cv_url", designer.getCV_url());
+                                startActivity(intent);
+                            }
+
                         }
                     });
                 } else {

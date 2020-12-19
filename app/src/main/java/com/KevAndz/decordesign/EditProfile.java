@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.KevAndz.decordesign.controller.PrefManager;
@@ -31,6 +32,7 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,26 +43,18 @@ import java.util.HashMap;
 
 public class EditProfile extends AppCompatActivity {
     EditText editTextName, editTextUsername, editTextEmail, editPhoneNumber, editTextBirthDate;
+    TextView click_cv;
     String gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
         final User user = PrefManager.getInstance(this.getApplicationContext()).getUser();
+        Bundle bundle = getIntent().getExtras();
 
         if (user.getProf_img_url() != null){
             ImageView imageView = (ImageView) findViewById(R.id.profilePict);
             Picasso.get().load(user.getProf_img_url() ).into(imageView);
-        }
-
-        Bundle bundle = getIntent().getExtras();
-
-        if (user.getUserLevel() == 0){
-            LinearLayout designerLayout = (LinearLayout) findViewById(R.id.designerLayoutEditProfile);
-            designerLayout.setVisibility(View.GONE);
-        }else{
-            //TODO bikin url untuk portofolio
         }
 
         Spinner genderSpinner = (Spinner) findViewById(R.id.genderOptions);
@@ -124,6 +118,26 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
+        if (user.getUserLevel() == 0){
+            LinearLayout designerLayout = (LinearLayout) findViewById(R.id.designerLayoutEditProfile);
+            designerLayout.setVisibility(View.GONE);
+        }else {
+            if (user.getCV_url() != null){
+                TextView click_cv = (TextView)findViewById(R.id.click_cv);
+                click_cv.setText("click to show");
+            }
+        }
+
+        findViewById(R.id.CvImageViewGo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), UploadCV.class);
+                intent.putExtra("user_id", user.getId());
+                intent.putExtra("cv_url", user.getCV_url());
+                startActivityForResult(intent, 10002);
+            }
+        });
+
         findViewById(R.id.profilePict).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,6 +148,7 @@ public class EditProfile extends AppCompatActivity {
 
             }
         });
+
 
         findViewById(R.id.editProfileBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,6 +221,7 @@ public class EditProfile extends AppCompatActivity {
                 gender,
                 phonenumber,
                 user.getProf_img_url(),
+                user.getCV_url(),
                 user.getUserLevel()
         );
         //storing new updated data in shared preferences

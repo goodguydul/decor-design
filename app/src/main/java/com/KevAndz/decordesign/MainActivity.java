@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.KevAndz.decordesign.controller.PrefManager;
 
 public class MainActivity extends AppCompatActivity {
-    String usernameText, emailProfileText, nameProfileText, profilePhoneText, profileimg_url;
+    String usernameText, emailProfileText, nameProfileText, profilePhoneText, profileimg_url, cv_url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
         nameProfileText     = user.getName();
         profilePhoneText    = user.getPhonenumber();
         profileimg_url      = user.getProf_img_url();
+        cv_url              = user.getCV_url();
 
-        if (usernameText.equals("null") || emailProfileText.equals("null") || nameProfileText.equals("null") || nameProfileText.equals("") || profilePhoneText.equals("null") || profileimg_url.equals("null")){
+        if (usernameText.equals("null") || emailProfileText.equals("null") || nameProfileText.equals("null") || nameProfileText.equals("") || profilePhoneText.equals("null") || profileimg_url.equals("null") || cv_url.equals("null")){
             new android.os.Handler().postDelayed(
                     new Runnable() {
                         public void run() {

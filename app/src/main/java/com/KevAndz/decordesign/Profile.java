@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -25,7 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Profile extends Fragment {
-    TextView usernameText, emailProfileText, nameProfileText, profilePhoneText, genderText, birthdateText;
+    TextView usernameText, emailProfileText, nameProfileText, profilePhoneText, genderText, birthdateText, click_cv;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,8 +86,23 @@ public class Profile extends Fragment {
             LinearLayout designerLayout = (LinearLayout) view.findViewById(R.id.designerLayout1);
             designerLayout.setVisibility(View.GONE);
         }else{
-            //TODO bikin url untuk portofolio
+            if(!user.getCV_url().equals("null") || user.getCV_url() != null){
+                click_cv =  (TextView) view.findViewById(R.id.click_cv);
+                click_cv.setText("Click to show CV");
+            }
         }
+
+        view.findViewById(R.id.CvImageViewGo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), ShowCV.class);
+                intent.putExtra("id", user.getId());
+                intent.putExtra("name", user.getName());
+                intent.putExtra("cv_url", user.getCV_url());
+                startActivityForResult(intent, 10001);
+            }
+        });
 
         view.findViewById(R.id.profileMenuBtn).setOnClickListener(new View.OnClickListener() {
             @Override
