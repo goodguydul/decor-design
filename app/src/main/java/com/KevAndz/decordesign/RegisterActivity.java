@@ -229,6 +229,7 @@ public class RegisterActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
+                Log.d("JSON ERROR", String.valueOf(e));
                 e.printStackTrace();
             }
         }

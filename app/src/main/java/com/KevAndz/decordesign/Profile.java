@@ -41,7 +41,8 @@ public class Profile extends Fragment {
         birthdateText = (TextView) view.findViewById(R.id.birthdateText);
 
         final User user = PrefManager.getInstance(getActivity().getApplicationContext()).getUser();
-        if (user.getProf_img_url() != null){
+
+        if (!user.getProf_img_url().equals("null")){
             ImageView imageView = (ImageView) view.findViewById(R.id.profilePict);
             Picasso.get().load(user.getProf_img_url() ).into(imageView);
         }
@@ -86,9 +87,11 @@ public class Profile extends Fragment {
             LinearLayout designerLayout = (LinearLayout) view.findViewById(R.id.designerLayout1);
             designerLayout.setVisibility(View.GONE);
         }else{
-            if(!user.getCV_url().equals("null") || user.getCV_url() != null){
+            if(!user.getCV_url().equals("null")){
                 click_cv =  (TextView) view.findViewById(R.id.click_cv);
                 click_cv.setText("Click to show CV");
+            }else{
+                view.findViewById(R.id.CvImageViewGo).setVisibility(View.GONE);
             }
         }
 

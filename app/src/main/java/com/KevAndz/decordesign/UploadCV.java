@@ -1,6 +1,7 @@
 package com.KevAndz.decordesign;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -130,7 +131,7 @@ public class UploadCV extends AppCompatActivity {
                 String uploadId = UUID.randomUUID().toString();
                 String path = FilePath.getPath(this, filePath);
                 //Creating a multi part request
-                new MultipartUploadRequest(this, uploadId, "https://ddapi.000webhostapp.com/api/upload.php")
+                new MultipartUploadRequest(this, uploadId, "http://ddapi.ulasanproduk.com/api/upload.php")
                         .addFileToUpload(path, "pdf") //Adding file
                         .addParameter("id", id) //Adding text parameter to the request
                         .addParameter("action", "cv") //Adding text parameter to the request
@@ -162,11 +163,12 @@ public class UploadCV extends AppCompatActivity {
                                         user.getBirthdate(),
                                         user.getPhonenumber(),
                                         user.getProf_img_url(),
-                                        "https://ddapi.000webhostapp.com/api/uploads/cv/" + user.getId() + ".pdf",
+                                        "http://ddapi.ulasanproduk.com/api/uploads/cv/" + user.getId() + ".pdf",
                                         user.getUserLevel()
                                 );
                                 //storing new updated data in shared preferences
                                 PrefManager.getInstance(getApplicationContext()).setUserLogin(updatedData);
+                                setResult(Activity.RESULT_OK);
                                 finish();
                             }
 

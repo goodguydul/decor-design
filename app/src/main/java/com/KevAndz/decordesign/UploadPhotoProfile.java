@@ -1,6 +1,7 @@
 package com.KevAndz.decordesign;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 
 import com.KevAndz.decordesign.controller.PrefManager;
 import com.KevAndz.decordesign.controller.URLS;
+import com.squareup.picasso.Picasso;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.ServerResponse;
@@ -51,12 +54,19 @@ public class UploadPhotoProfile extends AppCompatActivity {
     private Uri filePath;
     private ImageView imageView;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_upload_photo_profile);
-        imageView = (ImageView) findViewById(R.id.profilePict);
+        imageView = findViewById(R.id.profilePict);
+        User user = PrefManager.getInstance(this).getUser();
+        if (!user.getProf_img_url().equals("null")){
+            Picasso.get().load(user.getProf_img_url() ).into(imageView);
+        }
+
 
         findViewById(R.id.sdBackBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,13 +84,14 @@ public class UploadPhotoProfile extends AppCompatActivity {
         });
 
         findViewById(R.id.saveProfilePictureBtn).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    uploadMultipart();
-                }
+            @Override
+            public void onClick(View view) {
+                uploadMultipart();
+            }
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void uploadMultipart() {
         final Bundle bundle = getIntent().getExtras();
         String id = String.valueOf(bundle.getInt("user_id", 0));
@@ -92,12 +103,12 @@ public class UploadPhotoProfile extends AppCompatActivity {
             Log.d("SAVEBTN", "Clicked");
             try {
                 //getting the actual path of the image
-                String path = getPath(filePath);
+                String path = FilePath.getPath(this,filePath);
                 String uploadId = UUID.randomUUID().toString();
 
                 //Creating a multi part request
                 assert bundle != null;
-                new MultipartUploadRequest(this, uploadId, "https://ddapi.000webhostapp.com/api/upload.php")
+                new MultipartUploadRequest(this, uploadId, "http://ddapi.ulasanproduk.com/api/upload.php")
                         .addFileToUpload(path, "image") //Adding file
                         .addParameter("id", id) //Adding text parameter to the request
                         .addParameter("action", "photo") //Adding text parameter to the request
@@ -128,12 +139,13 @@ public class UploadPhotoProfile extends AppCompatActivity {
                                         user.getBirthdate(),
                                         user.getBirthdate(),
                                         user.getPhonenumber(),
-                                        "https://ddapi.000webhostapp.com/api/uploads/img/" + user.getId() + ".jpg",
+                                        "http://ddapi.ulasanproduk.com/api/uploads/img/" + user.getId() + ".jpg",
                                         user.getCV_url(),
                                         user.getUserLevel()
                                 );
                                 //storing new updated data in shared preferences
                                 PrefManager.getInstance(getApplicationContext()).setUserLogin(updatedData);
+                                setResult(Activity.RESULT_OK);
                                 finish();
                             }
 
@@ -178,22 +190,22 @@ public class UploadPhotoProfile extends AppCompatActivity {
         }
     }
 
-    public String getPath(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-        cursor.close();
-
-        cursor = getContentResolver().query(
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        cursor.close();
-
-        return path;
-    }
+//    public String getPath(Uri uri) {
+//        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+//        cursor.moveToFirst();
+//        String document_id = cursor.getString(0);
+//        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+//        cursor.close();
+//
+//        cursor = getContentResolver().query(
+//                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+//        cursor.moveToFirst();
+//        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+//        cursor.close();
+//
+//        return path;
+//    }
 
     private void requestStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)

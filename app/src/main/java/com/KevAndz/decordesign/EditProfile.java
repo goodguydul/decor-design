@@ -52,12 +52,12 @@ public class EditProfile extends AppCompatActivity {
         final User user = PrefManager.getInstance(this.getApplicationContext()).getUser();
         Bundle bundle = getIntent().getExtras();
 
-        if (user.getProf_img_url() != null){
-            ImageView imageView = (ImageView) findViewById(R.id.profilePict);
+        if (!user.getProf_img_url().equals("null")){
+            ImageView imageView = findViewById(R.id.profilePict);
             Picasso.get().load(user.getProf_img_url() ).into(imageView);
         }
 
-        Spinner genderSpinner = (Spinner) findViewById(R.id.genderOptions);
+        Spinner genderSpinner = findViewById(R.id.genderOptions);
         ArrayAdapter<String> genderAdapter= new ArrayAdapter<String>(EditProfile.this, android.R.layout.simple_list_item_1, getResources().getStringArray((R.array.gender)));
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderAdapter);
@@ -122,7 +122,7 @@ public class EditProfile extends AppCompatActivity {
             LinearLayout designerLayout = (LinearLayout) findViewById(R.id.designerLayoutEditProfile);
             designerLayout.setVisibility(View.GONE);
         }else {
-            if (user.getCV_url() != null){
+            if (!user.getProf_img_url().equals("null")){
                 TextView click_cv = (TextView)findViewById(R.id.click_cv);
                 click_cv.setText("click to show");
             }
@@ -144,7 +144,7 @@ public class EditProfile extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(), UploadPhotoProfile.class);
                 intent.putExtra("user_id", user.getId());
-                startActivityForResult(intent, 10001);
+                startActivityForResult(intent, 10000);
 
             }
         });
