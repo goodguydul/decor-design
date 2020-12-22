@@ -1,9 +1,9 @@
 package com.KevAndz.decordesign.model;
 
-public class ChatModel {
+public class ChatRoomModel {
     private String sender_image_url;
     private String receiver_name;
-    private int receiver_id;
+    private String receiver_id;
     private String message;
 
     public String getReceiverImageUrl() {
@@ -18,10 +18,10 @@ public class ChatModel {
     public void setReceiverName(String receiver_name) {
         this.receiver_name = receiver_name;
     }
-    public int getReceiverId() {
+    public String getReceiverId() {
         return receiver_id;
     }
-    public void setReceiverId(int receiver_id) {
+    public void setReceiverId(String receiver_id) {
         this.receiver_id = receiver_id;
     }
     public String getMessage() {

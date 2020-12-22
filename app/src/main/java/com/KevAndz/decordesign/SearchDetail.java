@@ -71,6 +71,17 @@ public class SearchDetail extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.sendMessageBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("USER_ID", String.valueOf(bundle.getInt("id")));
+                Intent intent = new Intent(view.getContext(), ChatRoom.class);
+                intent.putExtra("targetUser_id", bundle.getInt("id"));
+                intent.putExtra("targetUser_name", bundle.getString("names"));
+                startActivityForResult(intent, 10002);
+            }
+        });
+
         findViewById(R.id.sdBackBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

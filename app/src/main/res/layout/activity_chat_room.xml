@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/profileBackground"
+    tools:context=".EditProfile">
+
+  <android.support.design.widget.AppBarLayout
+      android:id="@+id/app_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:fitsSystemWindows="true"
+      android:theme="@style/AppTheme.AppBarOverlay">
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:contentScrim="@color/profilePrimaryDark"
+        app:expandedTitleMarginEnd="64dp"
+        app:expandedTitleMarginStart="48dp"
+        app:expandedTitleTextAppearance="@style/TransparentText"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:toolbarId="@+id/toolbar">
+
+
+      <android.support.v7.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          app:layout_collapseMode="pin"
+          app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+      <RelativeLayout
+          android:layout_width="fill_parent"
+          android:layout_height="80dp">
+
+        <Button
+            android:id="@+id/sdBackBtn"
+            style="@style/profileStyledBackButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:minWidth="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/messageSenderName"
+            android:layout_width="321dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toRightOf="@id/sdBackBtn"
+            android:gravity="center_vertical"
+            android:text="Name"
+            android:textSize="20dp"
+            android:textStyle="bold|italic" />
+      </RelativeLayout>
+    </android.support.design.widget.CollapsingToolbarLayout>
+
+  </android.support.design.widget.AppBarLayout>
+
+  <LinearLayout
+      android:id="@+id/linearLayout2"
+      android:layout_width="match_parent"
+      android:layout_height="587dp"
+      android:layout_below="@+id/app_bar"
+      android:layout_marginTop="80dp"
+      android:layout_marginBottom="10dp"
+      android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/lvChatData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        android:scrollbarStyle="outsideOverlay">
+
+    </ListView>
+
+  </LinearLayout>
+
+
+  <LinearLayout
+
+      android:id="@+id/messageBox"
+      android:layout_width="fill_parent"
+      android:layout_height="60dp"
+
+      android:layout_gravity="bottom|center_horizontal"
+      android:background="#FFFFFF"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:duplicateParentState="false"
+      android:isScrollContainer="false"
+      android:keepScreenOn="false"
+      android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/messageText"
+        style="@style/modifiedEditText"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:autofillHints=""
+        android:fontFamily="@font/convergence"
+        android:hapticFeedbackEnabled="false"
+        android:hint="Type your message..."
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/selector"
+        android:drawableTop="@android:drawable/ic_menu_send"
+        android:textColor="#fff" />
+  </LinearLayout>
+
+  <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:layout_gravity="center_horizontal|center_vertical"
+      android:visibility="gone" />
+
+</android.support.design.widget.CoordinatorLayout>

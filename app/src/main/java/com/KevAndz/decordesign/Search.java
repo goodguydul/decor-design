@@ -20,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.support.v4.app.Fragment;
 import com.KevAndz.decordesign.controller.DesignerAdapter;
@@ -90,7 +91,7 @@ public class Search extends Fragment {
         ul.execute();
     }
     class searchActionClass extends AsyncTask<Void, Void, String> {
-
+        ProgressBar progressBar;
         String searchQuery;
         searchActionClass(String searchQuery) {
             this.searchQuery = searchQuery;
@@ -99,12 +100,15 @@ public class Search extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar = getActivity().findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            progressBar.setVisibility(View.GONE);
             Log.d("jSON-Output", s);
 
             try {

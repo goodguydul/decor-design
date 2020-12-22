@@ -60,7 +60,7 @@
                         android:background="@drawable/profile_bk"/>
 
                     <Button
-                        android:id="@+id/editProfileBtn"
+                        android:id="@+id/sendMessageBtn"
                         style="@style/profileStyledSendMessageBtn"
                         android:layout_width="169dp"
                         android:minWidth="30dp"

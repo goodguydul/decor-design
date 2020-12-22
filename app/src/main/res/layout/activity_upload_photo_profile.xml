@@ -76,5 +76,14 @@
                 android:paddingRight="10dp"
                 android:text="@string/save" />
         </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:visibility="gone" />
     </android.support.design.widget.CollapsingToolbarLayout>
 </android.support.constraint.ConstraintLayout>

@@ -27,6 +27,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.KevAndz.decordesign.controller.PrefManager;
@@ -62,6 +63,7 @@ public class UploadCV extends AppCompatActivity {
 
     //Uri to store the image uri
     private Uri filePath;
+    ProgressBar progressBar;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -72,6 +74,7 @@ public class UploadCV extends AppCompatActivity {
         requestStoragePermission();
 
         WebView pdfView = (WebView) findViewById(R.id.cv_view);
+        progressBar = findViewById(R.id.progressBar);
 
         final Bundle bundle = getIntent().getExtras();
         assert bundle != null;
@@ -117,6 +120,8 @@ public class UploadCV extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void uploadMultipart() {
+
+
         final Bundle bundle = getIntent().getExtras();
         String id = String.valueOf(bundle.getInt("user_id", 0));
 
@@ -140,7 +145,7 @@ public class UploadCV extends AppCompatActivity {
                         .setDelegate(new UploadStatusDelegate() {  //Add these lines to get upload status
                             @Override
                             public void onProgress(Context context, UploadInfo uploadInfo) {
-
+                                progressBar.setVisibility(View.VISIBLE);
                             }
 
                             @Override
@@ -152,6 +157,7 @@ public class UploadCV extends AppCompatActivity {
 
                             @Override
                             public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(context, "CV Uploaded!", Toast.LENGTH_SHORT).show();
                                 User user = PrefManager.getInstance(context).getUser();
                                 User updatedData = new User(

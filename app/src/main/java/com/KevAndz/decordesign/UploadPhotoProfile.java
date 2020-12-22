@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.KevAndz.decordesign.controller.PrefManager;
@@ -41,7 +42,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class UploadPhotoProfile extends AppCompatActivity {
-
+    ProgressBar progressBar;
     private static final String TAG = "AndroidUploadService";
 
     private final SingleUploadBroadcastReceiver uploadReceiver =
@@ -62,6 +63,9 @@ public class UploadPhotoProfile extends AppCompatActivity {
 
         setContentView(R.layout.activity_upload_photo_profile);
         imageView = findViewById(R.id.profilePict);
+        progressBar = findViewById(R.id.progressBar);
+
+
         User user = PrefManager.getInstance(this).getUser();
         if (!user.getProf_img_url().equals("null")){
             Picasso.get().load(user.getProf_img_url() ).into(imageView);
@@ -117,7 +121,7 @@ public class UploadPhotoProfile extends AppCompatActivity {
                         .setDelegate(new UploadStatusDelegate() {  //Add these lines to get upload status
                             @Override
                             public void onProgress(Context context, UploadInfo uploadInfo) {
-
+                                progressBar.setVisibility(View.VISIBLE);
                             }
 
                             @Override
@@ -129,6 +133,7 @@ public class UploadPhotoProfile extends AppCompatActivity {
 
                             @Override
                             public void onCompleted(Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(context, "Profile Photo Uploaded!", Toast.LENGTH_SHORT).show();
                                 User user = PrefManager.getInstance(context).getUser();
                                 User updatedData = new User(

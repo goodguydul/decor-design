@@ -2,6 +2,8 @@ package com.KevAndz.decordesign.controller;
 
 import com.KevAndz.decordesign.model.ChatModel;
 import com.KevAndz.decordesign.R;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 import android.app.Activity;
 import android.content.Context;
@@ -40,17 +42,22 @@ public class ChatAdapter extends ArrayAdapter<ChatModel> {
             holder.txtSenderMessage=(TextView) v.findViewById(R.id.txtSenderName);
             holder.txtSenderName=(TextView) v.findViewById(R.id.txtSenderMessage);
 
-
             v.setTag(holder);
         }
         else{
             holder=(ChatHolder) v.getTag();
         }
 
-        ChatModel student=listMessage.get(position);
-        holder.imgSenderUser.setImageResource(student.getSenderImage());
-        holder.txtSenderName.setText(student.getSender());
-        holder.txtSenderMessage.setText(student.getMessage());
+        ChatModel chat = listMessage.get(position);
+
+        if(chat.getReceiverImageUrl() != null){
+            Picasso.get().load(chat.getReceiverImageUrl()).into(holder.imgSenderUser);
+        }else{
+            holder.imgSenderUser.setImageResource(R.drawable.user);
+        }
+
+        holder.txtSenderName.setText(chat.getReceiverName());
+        holder.txtSenderMessage.setText(chat.getMessage());
         return v;
     }
 
