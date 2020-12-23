@@ -105,11 +105,12 @@ public class Home extends Fragment {
 
                         FeedModel feed = new FeedModel();
                         feed.setAuthorId(String.valueOf(objs.getInt("user_id")));
+                        feed.setPostId(String.valueOf(objs.getInt("post_id")));
                         feed.setAuthorImgUrl(objs.getString("user_image"));
                         feed.setAuthorName(objs.getString("user_name"));
                         feed.setCaption(objs.getString("caption"));
                         feed.setPostImageUrl(objs.getString("img_url"));
-                        feed.setLike(objs.getString("likes") + " Likes");
+                        feed.setLike(objs.getString("likes"));
                         feed.setPostDate(objs.getString("postDate"));
                         listData.add(feed);
                     }
@@ -125,8 +126,16 @@ public class Home extends Fragment {
                             Intent intent;
                             intent = new Intent(view.getContext(), PostDetails.class);
                             intent.putExtra("targetUser_id", feed.getAuthorId());
+                            intent.putExtra("post_id", feed.getPostId());
+                            intent.putExtra("authorImgUrl", feed.getAuthorImageUrl());
+                            intent.putExtra("authorName", feed.getAuthorName());
+                            intent.putExtra("imgPost", feed.getPostImageUrl());
+                            intent.putExtra("like", feed.getLike());
+                            intent.putExtra("postDate", feed.getPostDate());
+                            intent.putExtra("captionText", feed.getCaption());
 
-                            startActivity(intent);
+
+                            startActivityForResult(intent, 10007);
                         }
                     });
                 } else {

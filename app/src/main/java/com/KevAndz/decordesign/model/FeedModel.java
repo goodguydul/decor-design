@@ -8,6 +8,7 @@ public class FeedModel {
     private String post_like;
     private String post_date;
     private String post_imgurl;
+    private String post_id;
 
     public String getAuthorImageUrl() {
         return this.author_image_url;
@@ -30,11 +31,17 @@ public class FeedModel {
     public String getAuthorId() {
         return this.author_id;
     }
+    public String getPostId() {
+        return this.post_id;
+    }
     public void setAuthorImgUrl(String author_image_url) {
         this.author_image_url = author_image_url;
     }
     public void setAuthorId(String user_id) {
         this.author_id = user_id;
+    }
+    public void setPostId(String post_id) {
+        this.post_id = post_id;
     }
     public void setAuthorName(String user_name) {
         this.author_name = user_name;

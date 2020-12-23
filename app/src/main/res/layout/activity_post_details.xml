@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
+    android:id="@+id/postDetails"
     android:layout_height="fill_parent">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -21,8 +22,6 @@
 
     <TextView
         android:id="@+id/txtName"
-        android:focusable="false"
-        android:clickable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -30,6 +29,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
         android:layout_toEndOf="@id/imgAuthorUser"
+        android:clickable="true"
+        android:enabled="true"
+        android:focusable="true"
         android:text="TextView"
         android:textColor="@color/primaryTextColor"
         android:textSize="17sp"

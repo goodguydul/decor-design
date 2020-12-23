@@ -56,7 +56,7 @@ public class FeedAdapter extends ArrayAdapter<FeedModel> {
 
         FeedModel feed = listMessage.get(position);
 
-        if(feed.getAuthorImageUrl() != null){
+        if(feed.getAuthorImageUrl() != null && ! feed.getAuthorImageUrl().equals("null")){
             Picasso.get().load(feed.getAuthorImageUrl()).into(holder.imgAuthorUser);
         }else{
             holder.imgAuthorUser.setImageResource(R.drawable.user);
@@ -64,7 +64,7 @@ public class FeedAdapter extends ArrayAdapter<FeedModel> {
 
         holder.txtName.setText(feed.getAuthorName());
         holder.txtMessage.setText(feed.getCaption());
-        holder.likeCounter.setText(feed.getLike());
+        holder.likeCounter.setText(feed.getLike()+ " Likes");
         holder.postDate.setText(feed.getPostDate());
         Picasso.get().load(feed.getPostImageUrl()).into(holder.imgPost);
 
