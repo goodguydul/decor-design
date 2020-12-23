@@ -6,11 +6,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgSenderUser"
         android:layout_width="69dp"
         android:layout_height="82dp"
-        app:srcCompat="@drawable/user" />
+        android:layout_marginStart="5dp"
+        android:src="@drawable/user"
+        app:civ_border_color="#BABABA"
+        app:civ_border_width="1dp" />
 
     <TextView
         android:id="@+id/txtSenderName"

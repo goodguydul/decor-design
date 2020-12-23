@@ -9,5 +9,6 @@ public class URLS {
     public static final String URL_CHATDATA= URL_ROOT + "retrieveFullMessage";
     public static final String URL_SENDCHAT= URL_ROOT + "sendMessage";
     public static final String URL_UPDATE= URL_ROOT + "update";
+    public static final String URL_FETCHFEED= URL_ROOT + "fetchFeed";
     public static final String URL_UPLOAD_PROFILE_PIC= "http://ddapi.ulasanproduk.com/api/upload.php";
 }

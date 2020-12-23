@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.KevAndz.decordesign.controller.ChatAdapter;
@@ -36,8 +37,8 @@ public class Chat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         User user = PrefManager.getInstance(getActivity().getApplicationContext()).getUser();
-
-        Chat.showChat show = new Chat.showChat(user.getId());
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        Chat.showChat show = new Chat.showChat(user.getId(), progressBar);
         show.execute();
 
         return view;
@@ -46,17 +47,21 @@ public class Chat extends Fragment {
     class showChat extends AsyncTask<Void, Void, String> {
 
         int user_id;
-        showChat(int user_id) {
+        ProgressBar progressBar;
+        showChat(int user_id, ProgressBar progressBar) {
             this.user_id = user_id;
+            this.progressBar = progressBar;
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(String s) {
+            progressBar.setVisibility(View.GONE);
             super.onPostExecute(s);
             Log.d("jSON-Output", s);
 

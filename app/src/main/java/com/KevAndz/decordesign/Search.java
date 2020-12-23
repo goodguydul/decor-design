@@ -189,6 +189,4 @@ public class Search extends Fragment {
             return requestHandler.sendPostRequest(URLS.URL_SEARCH, params);
         }
     }
-
-
 }
